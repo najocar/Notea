@@ -1,0 +1,12 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field>
+        <mat-label>Título</mat-label>
+        <input formControlName="titulo" matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Descripción</mat-label>
+        <textarea formControlName="description" matInput></textarea>
+    </mat-form-field>
+    <input type="hidden" formControlName="id">
+    <button mat-flat-button color="primary" type="submit" [disabled]="this.form.status!='VALID'">Guardar</button>
+</form>

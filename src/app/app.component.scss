@@ -1,0 +1,20 @@
+li{
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+}
+
+a:hover{
+    background-color: rgba(245, 245, 220, 0.192);
+}
+
+.active{
+    background-color: rgba(245, 245, 220, 0.47);
+}

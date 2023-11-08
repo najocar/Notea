@@ -1,0 +1,15 @@
+<nav>
+    <ol>
+        <li (click)="this.refresh()" [style.color]="color">{{page}}</li>
+        <li>
+            <input type="text" [(ngModel)]="color">
+        </li>
+        <li *ngIf="false">
+            Estilo agradable
+        </li>
+    </ol>
+</nav>
+
+<!-- tackBy:trackByNotes -->
+<app-note *ngFor="let note of notes; let i = index; " [note]="note"
+(editNote)="this.editingNote(note)" (removeNote)="this.removingNote(note)"></app-note>

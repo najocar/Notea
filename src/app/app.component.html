@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+    <span>My Application</span>
+    
+    <ul style="list-style: none;">
+        <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a></li>
+        <li><a routerLink="/notes" routerLinkActive="active">notes</a></li>
+        <li><a routerLink="/noexiste" routerLinkActive="active">Otra</a></li>
+    </ul>
+</mat-toolbar>
+
+<!-- <app-note [note]="{title:'test',description:'test'}"
+(editNote)="this.editingNote($event)" (removeNote)="this.removingNote($event)"></app-note> -->
+<router-outlet></router-outlet>

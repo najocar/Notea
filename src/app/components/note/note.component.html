@@ -1,0 +1,6 @@
+<mat-list>
+    <mat-list-item>{{note.title}} {{note.description}} 
+        <button mat-raised-button color="primary" (click)="editNoteFn()"><mat-icon>edit</mat-icon>Edit</button>
+        <button mat-raised-button color="warn" (click)="removeNoteFn()"><mat-icon>delete</mat-icon>Delete</button></mat-list-item>
+
+</mat-list>
