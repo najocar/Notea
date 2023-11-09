@@ -1,24 +1,34 @@
 import { Injectable } from '@angular/core';
 import { INote } from '../model/inote';
+import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotesService {
-  public notes:INote[] = [
-    {id:1,title:'Nota1',description:'description 1'},
-    {id:2,title:'Nota2',description:'description 2'}
-  ]
+  private dbPath = '/notes';
+  notesRef!: AngularFirestoreCollection<any>;
 
-  constructor() { }
+  public notes:INote[] = [];
 
-  public createNote(newNote:INote){
+  constructor(private db: AngularFirestore) {
+    this.notesRef = db.collection(this.dbPath);
+  }
+
+  public async createNote(newNote:INote){
     /**
-     * base de datos -> clave primaria id
+     * conectar firebase
      */
-    let id=Math.floor(Math.random()*1000);
-    newNote.id=id;
-    this.notes.push(newNote);
+    try{
+      let dRef:DocumentReference<any> = await this.notesRef.add({...newNote});
+      newNote.id=dRef.id;
+      this.notes.push(newNote);
+    }catch(err){
+      console.log(err);
+    }
+
+
+    
   }
 
   public removeNote(id:any){

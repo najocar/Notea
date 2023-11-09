@@ -12,10 +12,12 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { NotesComponent } from './pages/notes/notes.component';
 import { FormsModule } from '@angular/forms';
 import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
-import {
-  GoogleLoginProvider
-} from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { NotesService } from './services/notes.service';
+import { HttpClientModule } from '@angular/common/http';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { environment } from 'src/environments/environment.development';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,10 @@ import { NotesService } from './services/notes.service';
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule
   ],
   providers: [NotesService,
     {
