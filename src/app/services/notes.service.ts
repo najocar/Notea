@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { INote } from '../model/inote';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/compat/firestore';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,18 @@ export class NotesService {
 
   public notes:INote[] = [];
 
+  public dataSubject = new BehaviorSubject<INote[] | null>([]);
+
   constructor(private db: AngularFirestore) {
     this.notesRef = db.collection(this.dbPath);
+
+    //cargar las notas del servidor
+    this.notesRef.get().subscribe(d=>{
+      let docs = d.docs;
+      this.notes = docs.map(d=>{
+        return {id:d.id,...d.data()}
+      });
+    })
   }
 
   public async createNote(newNote:INote){
@@ -20,7 +31,8 @@ export class NotesService {
      * conectar firebase
      */
     try{
-      let dRef:DocumentReference<any> = await this.notesRef.add({...newNote});
+      let {id,...newNoteWithoutID} = newNote;
+      let dRef:DocumentReference<any> = await this.notesRef.add({...newNoteWithoutID});
       newNote.id=dRef.id;
       this.notes.push(newNote);
     }catch(err){
@@ -40,5 +52,16 @@ export class NotesService {
 
   public getNotes():INote[]{
     return this.notes;
+  }
+
+  public async updateNote(note:INote){
+    try{
+      let {id, ...noteWithoutID} = note;
+      await this.notesRef.doc(note.id?.toString()).update(noteWithoutID);
+      this.notes = this.notes.map(n => n.id != note.id?n:note);
+      this.dataSubject.next(this.notes);
+    }catch(err){
+      console.error(err);
+    }
   }
 }

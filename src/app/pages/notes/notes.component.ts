@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { INote } from 'src/app/model/inote';
 import { NotesService } from 'src/app/services/notes.service';
 
@@ -13,7 +14,8 @@ export class NotesComponent {
   public page:string = 'Inicio';
   public notes:INote[] = [];
 
-  constructor(private noteS:NotesService){
+  constructor(private noteS:NotesService
+    ,private router:Router){
     this.notes = noteS.getNotes();
   }
 
@@ -31,7 +33,7 @@ export class NotesComponent {
   }
 
   public editingNote($event:INote){
-    console.log("editando nota");
+    this.router.navigate(['updateNote/${$event.id}']);
   }
 
   // trackByNotes(index:number,item:INote){

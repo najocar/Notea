@@ -16,7 +16,7 @@ export class NewComponent {
 
   }
 
-  addNote($event:INote){
+  addNote($event:any){
     this.noteS.createNote($event);
   }
 }

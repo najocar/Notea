@@ -40,4 +40,8 @@ export class LoginService {
     async singOut(): Promise<void>{
       return await this.authService.signOut();
     }
+
+    async getSrc(): Promise<string>{
+      return await this.user.photoUrl;
+    }
 }

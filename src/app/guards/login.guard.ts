@@ -8,7 +8,8 @@ export const loginGuard: CanActivateFn = (route, state) => {
   const loginS = inject(LoginService);
 
       //emulating a loggin system -> fake data
-      let Login = loginS.isAuth();
+      //let Login = loginS.isAuth();
+      let Login = true;
 
       let result=false;
       if(!Login){
