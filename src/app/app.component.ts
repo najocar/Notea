@@ -14,8 +14,14 @@ export class AppComponent {
   public isloged:boolean = false;
   public authParams?:any;
 
-  // constructor(private authService: SocialAuthService
-  //   ,private loginS: LoginService){}
+  deslog(){
+    sessionStorage.removeItem('user');
+    this.loginS.singOut;
+  }
+
+  constructor(private loginS: LoginService){}
+  //  constructor(private authService: SocialAuthService
+  //    ,private loginS: LoginService){}
 
   // ngOnInit(){
   //   this.authService.authState.subscribe(info => {

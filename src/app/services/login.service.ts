@@ -14,19 +14,37 @@ export class LoginService {
 
   constructor(private authService: SocialAuthService,
     private router:Router) {
-      this.authService.authState.subscribe((user) => {
-        this.user = user;
-        this.loggedIn = (user != null);
-        if(this.loggedIn){
-          if(this.originalPath){
-            this.router.navigate([this.originalPath]);
-            this.originalPath='';
-          }else
-            this.router.navigate(['']);
-        }else{
-          this.router.navigate(['/login']);
-        }
-      });
+      if(!sessionStorage.getItem('user')){
+        console.log('arriba');
+        this.authService.authState.subscribe((user) => {
+          this.user = user;
+          sessionStorage.setItem('user', JSON.stringify(user));
+          this.loggedIn = (user != null);
+          if(this.loggedIn){
+            if(this.originalPath){
+              this.router.navigate([this.originalPath]);
+              this.originalPath='';
+            }else
+              this.router.navigate(['']);
+          }else{
+            this.router.navigate(['/login']);
+          }
+        });
+      }else{
+        let userStorage = sessionStorage.getItem('user') || '';
+        this.user = JSON.parse(userStorage);
+        this.loggedIn = (this.user != null);
+          if(this.loggedIn){
+            if(this.originalPath){
+              this.router.navigate([this.originalPath]);
+              this.originalPath='';
+            }else
+              this.router.navigate(['']);
+          }else{
+            this.router.navigate(['/login']);
+          }
+      }
+      
     }
 
     isAuth():boolean{

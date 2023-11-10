@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { INote } from '../model/inote';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/compat/firestore';
 import { BehaviorSubject } from 'rxjs';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class NotesService {
 
   public dataSubject = new BehaviorSubject<INote[] | null>([]);
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore, private loginS: LoginService) {
+    this.dbPath = this.loginS.user.id;
     this.notesRef = db.collection(this.dbPath);
 
     //cargar las notas del servidor
@@ -38,12 +40,15 @@ export class NotesService {
     }catch(err){
       console.log(err);
     }
-
-
     
   }
 
   public removeNote(id:any){
+    this.notesRef.doc(id).delete().then(() => {
+      console.log("Document successfully deleted!");
+    }).catch((error) => {
+      console.error("Error removing document: ", error);
+    });
     let newNotes = this.notes.filter((n)=>{
       return n.id!=id;
     });
