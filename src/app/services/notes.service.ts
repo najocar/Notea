@@ -62,11 +62,16 @@ export class NotesService {
   public async updateNote(note:INote){
     try{
       let {id, ...noteWithoutID} = note;
+      console.log(note)
       await this.notesRef.doc(note.id?.toString()).update(noteWithoutID);
       this.notes = this.notes.map(n => n.id != note.id?n:note);
       this.dataSubject.next(this.notes);
     }catch(err){
       console.error(err);
     }
+  }
+
+  getNote(id:string){
+    return this.notes.find(note => note.id === id);
   }
 }

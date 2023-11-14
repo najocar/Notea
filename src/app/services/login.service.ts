@@ -15,7 +15,6 @@ export class LoginService {
   constructor(private authService: SocialAuthService,
     private router:Router) {
       if(!sessionStorage.getItem('user')){
-        console.log('arriba');
         this.authService.authState.subscribe((user) => {
           this.user = user;
           sessionStorage.setItem('user', JSON.stringify(user));

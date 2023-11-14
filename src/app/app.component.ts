@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { LoginService } from './services/login.service';
-import { GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { Route, Router } from '@angular/router';
+import { Observable, filter, fromEvent, map, mapTo, merge, of, startWith } from 'rxjs';
 
 
 @Component({
@@ -9,32 +10,56 @@ import { GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/an
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Notea';
-  public src:string = '';
-  public isloged:boolean = false;
-  public authParams?:any;
+  router = inject(Router);
+  
 
-  deslog(){
+  title = 'Notea';
+  public src: string = '';
+  public isloged: boolean = false;
+  public authParams?: any;
+
+  deslog() {
+    this.loginS.loggedIn = false;
     sessionStorage.removeItem('user');
     this.loginS.singOut;
+    this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() => this.router.navigate(["/"]));
   }
 
-  constructor(private loginS: LoginService){}
+  constructor(private loginS: LoginService) { }
+
+  ngOnInit(){
+    // const message$ = fromEvent<StorageEvent>(window, "storage").pipe(
+    //   filter(event => event.storageArea === sessionStorage),
+    //   filter(event => event.key === "user"),
+    //   map(event => event.newValue)
+    // );
+    
+  }
+
+  //intervalID = setInterval(this.myCallback, 5000);
+
+  // myCallback() {
+  //   console.log(this.elementoPresente$.subscribe);
+  // }
+
+
+
   //  constructor(private authService: SocialAuthService
   //    ,private loginS: LoginService){}
 
-  // ngOnInit(){
-  //   this.authService.authState.subscribe(info => {
-  //     this.authParams = this.loginS.user;
-      
-  //     console.log(this.authParams)
-  //     console.log(this.authParams['photoUrl'])
-  //     this.src = this.authParams['photoUrl'];
-  //     this.isloged = true;
-  //   })
+  // ngOnInit() {
+
+  //   this.authParams = this.loginS;
+  //   //this.loginS.getSrc
+  //   //this.src = await this.loginS.getSrc;
+  //   //console.log(this.esperarSrc())
+  //   console.log(this.authParams['photoUrl'])
+  //   this.src = this.authParams['photoUrl'];
+  //   this.isloged = true;
+
   // }
-  
-  
-  
-  
+
+
+
+
 }

@@ -1,0 +1,16 @@
+.parent{
+    display: flex;
+    justify-content: center;
+
+    div{
+        width: 90%;
+        display: flex;
+        justify-content: space-around;
+    
+    }
+}
+
+
+app-note{
+    margin: 20px;
+}

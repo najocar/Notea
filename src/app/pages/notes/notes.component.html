@@ -11,5 +11,11 @@
 </nav> -->
 
 <!-- tackBy:trackByNotes -->
-<app-note *ngFor="let note of notes; let i = index; " [note]="note"
-(editNote)="this.editingNote(note)" (removeNote)="this.removingNote(note)"></app-note>
+
+<div class="parent">
+    <div>
+        <app-note *ngFor="let note of notes; let i = index; " [note]="note"
+        (editNote)="this.editingNote(note)" (removeNote)="this.removingNote(note)"></app-note>
+    </div>
+</div>
+

@@ -3,11 +3,14 @@ import { Router } from '@angular/router';
 import { INote } from 'src/app/model/inote';
 import { NotesService } from 'src/app/services/notes.service';
 
+
+
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.scss']
 })
+
 export class NotesComponent {
 
   public color:string = "fff"
@@ -33,7 +36,7 @@ export class NotesComponent {
   }
 
   public editingNote($event:INote){
-    this.router.navigate(['updateNote/${$event.id}']);
+    this.router.navigate(['updateNote/' + $event.id]);
   }
 
   // trackByNotes(index:number,item:INote){

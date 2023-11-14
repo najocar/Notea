@@ -39,6 +39,7 @@ export class FormNoteComponent {
   submit(){
     console.log(this.form);
     let newNote:INote = {
+      id:this.form.value.id,
       title:this.form.value.titulo,
       description: this.form.value.description
     }

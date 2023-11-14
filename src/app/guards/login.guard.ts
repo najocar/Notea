@@ -14,6 +14,7 @@ export const loginGuard: CanActivateFn = (route, state) => {
       let result=false;
       if(!Login){
         //Not Logged
+        result=false;
         if(route.url[0].toString()!='login'){
           //you're not logged?, ---> not alowed --> go login
           loginS.originalPath=route.url[0].toString();

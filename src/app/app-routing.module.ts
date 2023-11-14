@@ -16,6 +16,10 @@ const routes: Routes = [
   canActivate:[loginGuard]},
   {path:'login', component:LoginComponent},
   {path:'about', component:AboutComponent},
+  {path:'updateNote/:id',
+    loadComponent:() => import('./pages/update-note/update-note.component').then(m => m.UpdateNoteComponent),
+    canActivate:[loginGuard]
+  },
   {path:'', redirectTo:'/new', pathMatch:'full'},
   {path:'**', component:Error404Component}
   // {path:'b',canActivate:[guardGuard],loadComponent:()=>import('./pages/b/b.component').then(m=>m.BComponent)},

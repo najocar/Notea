@@ -1,14 +1,19 @@
 <mat-toolbar color="primary">
-    <span>My Application</span>
+    <span>Notea</span>
     
     <ul style="list-style: none;">
-        <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Nueva nota</a></li>
-        <li><a routerLink="/notes" routerLinkActive="active">Notas</a></li>
-        <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+        <div>
+            <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Nueva nota</a></li>
+            <li><a routerLink="/notes" routerLinkActive="active">Notas</a></li>
+            <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+        </div>
+        
+        <div>
+            <li><a id="unlog" routerLink="/" routerLinkActive="active" (click)="deslog()">Desloggear</a></li>
+        </div>
+        
     </ul>
 </mat-toolbar>
-<button (click)="deslog()">desloggear</button>
-<p>{{src}}</p>
 <!-- <img *ngIf="isloged == true" [src]="src" alt="Cargando..."> -->
 
 <!-- <app-note [note]="{title:'test',description:'test'}"

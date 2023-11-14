@@ -18,3 +18,12 @@ a:hover{
 .active{
     background-color: rgba(245, 245, 220, 0.47);
 }
+
+ul{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    #unlog{
+        background-color: rgb(240, 99, 99);
+    }
+}

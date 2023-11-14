@@ -1,0 +1,19 @@
+#parent{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    background-image: url("https://wallpapers.com/images/hd/glowing-red-angular-logo-7z0pp69vb06wl7aa.jpg");
+    background-size: cover;
+
+    #content{
+        color: white;
+        width: 70%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+
+        h4{
+            width: 400px;
+        }
+    }
+}
